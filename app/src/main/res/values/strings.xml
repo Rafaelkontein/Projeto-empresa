@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Project Rafa</string>
+    <string name="title_activity_act_aprenstacao">ActAprenstacao</string>
+    <string name="title_activity_act_dados_pessoais">ActDadosPessoais</string>
+</resources>
