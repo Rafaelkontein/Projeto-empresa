@@ -13,11 +13,6 @@ class ActDadosPessoais : ComponentActivity() {
             ProjectRafaTheme {
                 ScrenDadosPessoais(this)
 
-
-
-
-
-
             }
         }
     }
