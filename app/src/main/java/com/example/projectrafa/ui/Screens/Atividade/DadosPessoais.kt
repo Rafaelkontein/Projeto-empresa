@@ -17,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.projectrafa.ui.componente.PartesScren.topoCadastro
 import com.example.projectrafa.ui.componente.EditText.inputText
+import com.example.projectrafa.ui.componente.EditText.inputTextCelular
+import com.example.projectrafa.ui.componente.EditText.inputTextDataNacimento
 
 @Composable
 fun ScrenDadosPessoais(act:Activity = Activity()){
@@ -24,7 +26,8 @@ fun ScrenDadosPessoais(act:Activity = Activity()){
     Column (
         Modifier
             .padding()
-            .padding(top = 24.dp, start = 16.dp, end = 16.dp).verticalScroll(rememberScrollState())){
+            .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+            .verticalScroll(rememberScrollState())){
 
         topoCadastro("Dados Pessoais",act)
         Spacer(modifier = Modifier.height(32.dp))
@@ -42,8 +45,16 @@ fun ScrenDadosPessoais(act:Activity = Activity()){
 
         var textDataNascimento by remember { mutableStateOf("") }
 
-        inputText(textDataNascimento,"Data de nacimento") { novoValor ->
-            textDataNascimento = novoValor
+        inputTextDataNacimento(textDataNacimento = textDataNascimento) { novoValor ->
+                textDataNascimento = novoValor
+
+        }
+        var textCelular by remember { mutableStateOf("") }
+        Spacer(modifier = Modifier.height(32.dp))
+
+        inputTextCelular(textNome = textCelular, placeHolder ="Celular" ) {novoValor ->
+
+                textCelular = novoValor
 
         }
 
