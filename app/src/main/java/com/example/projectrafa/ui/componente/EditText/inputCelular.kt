@@ -24,7 +24,7 @@ import com.example.projectrafa.ui.componente.Text.textoTituloInput
 import com.example.projectrafa.ui.theme.CoresProjeto
 
 @Composable
-fun inputText( textNome: String, placeHolder:String, onTextNomeChange: (String) -> Unit){
+fun inputTextCelular( textNome: String, placeHolder:String, onTextNomeChange: (String) -> Unit){
     Column {
         textoTituloInput(placeHolder)
         Box (modifier = Modifier.fillMaxWidth()){
@@ -46,7 +46,8 @@ fun inputText( textNome: String, placeHolder:String, onTextNomeChange: (String) 
                         }, shape = RoundedCornerShape(8.dp)
                     )
                     .padding(top = 17.dp, start = 25.dp),
-                )
+                visualTransformation = PhoneVisualTransformation()
+            )
             if (textNome.isEmpty()) {
                 textHint(descrisicao = placeHolder)
             }
@@ -58,11 +59,45 @@ fun inputText( textNome: String, placeHolder:String, onTextNomeChange: (String) 
 
 @Preview
 @Composable
-fun previewInputPatrao() {
-    inputText("Teste","Teste",{})
+fun previewInpuCelular() {
+    inputTextCelular("11943129558", "celular", {})
 }
 
+class PhoneVisualTransformation : VisualTransformation {
+    @SuppressLint("SuspiciousIndentation")
+    override fun filter(text: AnnotatedString): TransformedText {
+        val phone = text.text.mapIndexed{index,c ->
+            when(index){
+                0-> "($c"
+                1 -> "$c) "
+                6 -> "$c-"
+                else -> c
+            }
+        }.joinToString(separator = "")
+        return TransformedText(AnnotatedString(phone), PhoneOffsetMapping)
+    }
 
+    object PhoneOffsetMapping: OffsetMapping {
+        override fun originalToTransformed(offset: Int): Int {
+            return when{
+                offset > 6 -> offset + 4
+                offset > 1 -> offset + 3
+                offset > 0 -> offset + 1
+                else -> offset
+            }
+        }
 
+        override fun transformedToOriginal(offset: Int): Int {
+            return when{
+                offset > 6 -> offset - 4
+                offset > 1 -> offset - 3
+                offset > 0 -> offset - 1
+                else -> offset
+            }
+        }
+
+    }
+
+}
 
 

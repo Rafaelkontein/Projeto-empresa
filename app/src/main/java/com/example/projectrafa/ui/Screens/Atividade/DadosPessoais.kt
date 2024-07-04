@@ -47,8 +47,6 @@ fun ScrenDadosPessoais(act:Activity = Activity()){
 
         }
 
-
-
     }
 
 }
